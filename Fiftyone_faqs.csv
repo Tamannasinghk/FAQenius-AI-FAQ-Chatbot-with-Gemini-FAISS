@@ -1,0 +1,117 @@
+,Question,Answer
+0,Can I open the FiftyOne App in a browser?,"Yes! In fact, this is the default behavior. Unless you're workingin a notebook, the App will open in your default
+web browser whenever you calllaunch_app(). Check out theenvironments guideto see how to use
+FiftyOne in all common local, remote, cloud, and notebook environments."
+1,Which web browsers does the FiftyOne App support?,"TheFiftyOne Appfully supports Chrome, Firefox, and
+Safari. You may find success using browsers like Edge, Opera, or Chromium, but your
+mileage will vary. Internet Explorer is explicitly unsupported at this time."
+2,Why isn't the App opening? Not connected to a session?,"When you callfo.launch_app()to
+launch theFiftyOne App, the App will launch
+asynchronously and return control to your Python process. The App will then
+remain connected until the process exits. If you are using the App in a script, you should usesession.wait()to block execution
+until you close it manually: If you launch the App in a script without includingsession.wait(), the App's
+connection will close when the script exits, and you will see a message like
+âIt looks like you are not connected to a sessionâ in the browser tab that was
+opened."
+3,Why can't I open the App from a script on Windows?,"If you are a Windows user launching theFiftyOne Appfrom
+a script, you should use the pattern below to avoidmultiprocessing issues, since the App
+is served via a separate process: Seethis sectionfor more details."
+4,Can I use FiftyOne in a notebook?,"Yes! FiftyOne supportsJupyter Notebooks,Google Colab Notebooks,Databricks Notebooks,
+andSageMaker Notebooks. All the usual FiftyOne commands can be run in notebook environments, and the
+App will launch/update in the output of your notebook cells! Check out thenotebook environment guidefor more
+information about running FiftyOne in notebooks."
+5,Why isn't the App loading in my cloud notebook?,"Except forGoogle ColabandDatabrickswhich have
+built-in App configuration, when working in a cloud notebook aproxy_urlshould be set in yourFiftyOne App config."
+6,Can I use FiftyOne in a remote notebook?,"Yes! It is possible to work with a Jupyter notebook in your local browser that
+is served from a remote machine. Refer tothis sectionof the environment guide for
+instructions to achieve this."
+7,Can I restrict access to my remote App instance?,"By default,remote App sessionswill listen to any
+connection to their ports. However, if desired, you can restrict access to an
+App session to a particular IP address or hostname byfollowing these instructions."
+8,Why aren't plots appearing in my notebook?,"If you are trying toview plotsin a Jupyter
+notebook but nothing appears after you callplot.show(), then you likely need
+tofollow these instructionsto install the
+proper packages and/or Jupyter notebook extensions. If the proper packages are installed but plots are still not displaying, try
+including the following commands in your notebook before creating any plots:"
+9,Can I access data stored on a remote server?,"Yes! If you install FiftyOne on both your remote server and local machine, then
+you canload a dataset remotelyand then explore it via anApp session on your local machine."
+10,Can I access data stored in the cloud?,Yes! Check outFiftyOne Enterprise.
+11,What operating systems does FiftyOne support?,"FiftyOne officially supports the latest versions of MacOS and Windows, as well
+as Amazon Linux 2 and 2023, Debian 9+ (x86_64 only), Ubuntu 18.04+, and
+RHEL/CentOS 7+. [NOTE: Note If installing on Ubuntu 22.04+, Debian, or RHEL/CentOS, fiftyone-db==0.4.3 must be requested. pip install fiftyone-db == 0 .4.3 fiftyone]"
+12,What image file types are supported?,"In general, FiftyOne supports all image typessupported by your browser,
+which includes standard image types like JPEG, PNG, and BMP. Some browsers like Safari natively support other image types such as TIFF,
+while others do not. You may be able to install a browser extension to work
+with additional image types, but Voxel51 does not currently recommend any
+such extensions in particular."
+13,What video file types are supported?,"Core methods that process videos can generally handle anycodec supported by FFmpeg. The App can play any video codec that is supported byHTML5 video on your browser,
+including MP4 (H.264), WebM, and Ogg. If you try to view a video with an
+unsupported codec in the App, you will be prompted to use thereencode_videos()utility method
+to re-encode the source video so it is viewable in the App. [NOTE: Note You must install FFmpeg in order to work with video
+datasets in FiftyOne. See this page for
+installation instructions.]"
+14,What label types are supported?,"FiftyOne provides support for all of the following label types for both image
+and video datasets: Check outthis guidefor simple recipes to
+load labels in these formats."
+15,What happened to my datasets from previous sessions?,"By default, datasets are non-persistent, which means they are deleted from the
+database whenever you exit (all) Python sessions in which you've imported
+FiftyOne. To make a dataset persistent, set itspersistentproperty toTrue: Seethis pagefor more details about dataset
+persistence. [NOTE: Note FiftyOne does not store the raw data in datasets directly (only the
+labels), so your source files on disk are never deleted!]"
+16,Why didn't changes to my dataset save?,"Althoughaddingsamples to datasets immediately writes them to the
+database, remember that anyeditsthat you make to asampleor itsframe labelswill not be written to the database until
+you callsample.save(). Similarly,settingthe properties of aDatasetobject will be immediately
+saved, but you must calldataset.save()whenever youeditfields such asinfoorclassesin-place. Refer tothis sectionfor more details about
+modifying samples andthis sectionfor more details about
+storing dataset-level information."
+17,Can I share a dataset with someone else?,"Yes! Here's a couple options: Option 1: Export and share You can easilyexport a datasetin one line of
+code, zip it, and share the zip with your collaborator, who can thenload it in a few lines of code. Option 2: Sharing a remote session Alternatively,see this FAQfor
+instructions on launching a remote session and inviting collaborator(s) to
+connect to it from their local machines."
+18,Can I use FiftyOne in multiple shells?,"Yes! Any changes you make to a dataset or its samples in one shell will be
+reflected in the other shells whenever you access that dataset. You can also
+launchmultiple App instances. Working with the same dataset in multiple shells simultaneously is generally
+seamless, even if you are editing the dataset, as theDatasetclass does not
+store itsSampleobjects in-memory, it loads them from the database only when
+they are requested. Therefore, if you add or modify aSamplein one shell,
+you will immediately have access to the updates the next time you request thatSamplein other shells. The one exception to this rule is thatDatasetandSampleobjects
+themselves are singletons, so if you hold references to these objects
+in-memory, they will not be automatically updated by re-accessing them, since
+the existing instances will be returned back to you. If a dataset may have been changed by another process, you can always manually
+callDataset.reload()to reload
+theDatasetobject and all in-memorySampleinstances that belong to it."
+19,Can I launch multiple App instances on a machine?,Yes! Simply specify a differentportfor each App instance that you create.
+20,Can I connect multiple App instances to the same dataset?,"Yes, multiple App instances can be connected to the sameDatasetvia remote
+sessions. [NOTE: Note Keep in mind that all users must have ssh access to the system from which
+the remote session(s) are launched in order to connect to them.] You can achieve multiple connections in two ways: Option 1: Same dataset, multiple sessions The typical way to connect multiple App instances to the same dataset is to
+create a separate remote session instance on the machine that houses theDatasetof interest for each local App instance that you want to create.See this FAQfor instructions on
+doing this. Option 2: Same dataset, same session Another option is to connect multiple App instances to a single remote session. First,create a remote sessionon the system that
+houses theDatasetusing either the CLI or Python: Then one or more users can use the CLI on their local machine toconnect to the remote session. [NOTE: Note When multiple App instances are connected to the same Session , any
+actions taken that affect the session (e.g., loading a view ) will be reflected in all connected
+App instances.]"
+21,Can I connect to multiple remote sessions?,"Yes, you can launch multiple instances of the App locally, each connected to a
+different remote session. The key here is to specify a differentlocal portfor each App instance that
+you create. Suppose you are connecting to multiple remoteSessioninstances that were
+created on different remote systems (e.g., an EC2 instance and a remote server
+that you own), using commands similar to: On your local machine, you canconnect to these remote sessionsusing a
+different local portXXXXandYYYYfor each. If you do not have FiftyOne installed on your local machine, open a new
+terminal window on your local machine and execute the following command to
+setup port forwarding to connect to your remote sessions: In the above,[<username#>@]<hostname#>refers to a remote machine andRRRR#is the remote port that you used for the remote session. Alternatively, if you have FiftyOne installed on your local machine, you canuse the CLIto automatically configure port
+forwarding and open the App in your browser as follows: [NOTE: Note You can also serve multiple remote sessions from the same machine .]"
+22,Can I serve multiple remote sessions from a machine?,"Yes, you can create multiple remote sessions on the same remote machine by
+specifying different ports for eachSessionthat you create: On your local machine(s), you can nowconnect to the remote sessions. Connections
+can be set up using port forwarding in the following way: In the above,[<username>@]<hostname>refers to your remote machine, andWWWWandZZZZare any 4 digit ports on your local machine(s). Alternatively, if you have FiftyOne installed on your local machine, you canuse the CLIto automatically configure port
+forwarding and open the App in your browser as follows:"
+23,Can I use my own MongoDB database?,"Yes, you can configure FiftyOne to connect to your own MongoDB instance by
+setting thedatabase_uriproperty of yourFiftyOne config. Refer tothis pagefor more information."
+24,Too many open files in system?,"If you are a MacOS user and see a âtoo many open files in systemâ error when
+performing import/export operations with FiftyOne, then you likely need to
+increase the open files limit for your OS. Following the instructions inthis postshould resolve the issue for you."
+25,Can I downgrade to an older version of FiftyOne?,"Certainly, refer tothese instructions."
+26,Are the Brain methods open source?,"Yes, theFiftyOne Brainmethods are open
+source. Check out theBrain documentationfor detailed
+instructions on using the various Brain methods."
+27,Does FiftyOne track me?,"FiftyOne tracks anonymous UUID-based usage of the App by default. We are a
+small team building an open source project, and basic knowledge of how users
+are engaging with the project is critical to informing the roadmap of the
+project. [NOTE: Note You can disable tracking by setting the do_not_track flag of your FiftyOne config .]"

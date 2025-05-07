@@ -1,0 +1,7 @@
+gradio
+faiss-cpu
+sentence-transformers
+pandas
+numpy
+langchain
+langchain-google-genai
