@@ -9,7 +9,7 @@
 ## 🚀 Try It Out
 
 👉 **Live Demo on Hugging Face Spaces**:  
-[![Hugging Face Space](https://huggingface.co/spaces/tannu038/InquiroBot)
+(https://huggingface.co/spaces/tannu038/InquiroBot)
 
 ---
 
