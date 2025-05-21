@@ -1,4 +1,4 @@
-,Question,Answer
+,Question,Answer 
 0,Can I open the FiftyOne App in a browser?,"Yes! In fact, this is the default behavior. Unless you're workingin a notebook, the App will open in your default
 web browser whenever you calllaunch_app(). Check out theenvironments guideto see how to use
 FiftyOne in all common local, remote, cloud, and notebook environments."
