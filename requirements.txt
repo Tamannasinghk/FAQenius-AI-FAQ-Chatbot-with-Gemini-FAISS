@@ -3,5 +3,5 @@ faiss-cpu
 sentence-transformers
 pandas
 numpy
-langchain
+langchain 
 langchain-google-genai
