@@ -1,4 +1,4 @@
-# 🤖 FAQenius – AI FAQ Chatbot with Gemini & FAISS
+# 🤖 FAQenius – AI FAQ Chatbot with Gemini & FAISS 
 
 **FAQenius** is a smart AI chatbot designed to answer questions based on a custom FAQ dataset. It uses sentence embeddings and vector similarity search (FAISS) to retrieve the most relevant FAQ, and then responds with a helpful, conversational answer using **Google Gemini**.
 
